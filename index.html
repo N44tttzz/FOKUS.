@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f5eb">
+    <title>FOKUS. — Find Your Flow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+    <div class="login-card" id="loginForm">
+        <a href="#" class="logo">🌱 FOKUS<span>.</span></a>
+        <p class="eyebrow">YOUR FOCUS SPACE</p>
+        <h1>Welcome back 🌼</h1>
+        <p class="login-description" id="loginDescription">Sign in to your focus space.</p>
+        <p class="auth-notice">Demo accounts are stored in this browser only. Password reset codes are shown here, not emailed.</p>
+
+        <form id="authForm">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" autocomplete="username" required maxlength="40">
+
+        <div id="registerEmailField" hidden>
+            <label for="registerEmail">Email address</label>
+            <input type="email" id="registerEmail" autocomplete="email">
+        </div>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" required minlength="6">
+
+        <p class="form-message" id="loginMessage" role="status"></p>
+        <button class="primary-btn" id="loginSubmit" type="submit">Sign in</button>
+        <div class="login-links">
+            <button type="button" id="toggleAuthMode">Create an account</button>
+            <button type="button" id="forgotPasswordLink">Forgot password?</button>
+        </div>
+        </form>
+
+        <form id="resetForm" class="reset-form" hidden>
+            <h2>Reset your password</h2>
+            <label for="resetEmail">Account email</label>
+            <input type="email" id="resetEmail" autocomplete="email" required>
+            <button class="secondary-btn reset-code-btn" id="sendResetCode" type="button">Get 6-digit code</button>
+            <label for="resetCode">6-digit code</label>
+            <input type="text" id="resetCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code">
+            <label for="resetNewPassword">New password</label>
+            <input type="password" id="resetNewPassword" minlength="6" autocomplete="new-password">
+            <p class="form-message" id="resetMessage" role="status"></p>
+            <button class="primary-btn" type="submit">Change password</button>
+            <button class="text-button" id="cancelReset" type="button">Back to sign in</button>
+        </form>
+    </div>
+</div>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <a href="#" class="logo">🌱 FOKUS<span>.</span></a>
+
+        <p class="menu-label">MENU</p>
+
+        <nav class="navigation">
+            <a href="#dashboard" class="nav-link active">🏡 Dashboard</a>
+            <a href="#focus" class="nav-link">⏱️ Focus Room</a>
+            <a href="#tasks" class="nav-link">📝 My Tasks</a>
+            <a href="#progress" class="nav-link">📊 My Progress</a>
+            <a href="#achievements" class="nav-link">🏆 Achievements</a>
+            <a href="#settings" class="nav-link">⚙️ Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="little-note">
+                <span>🌷</span>
+                <p>Small steps every day lead to big changes.</p>
+            </div>
+            <p class="sidebar-footer">Made with ♡ for your focus</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <p class="date-text" id="todayDate"></p>
+                <h1 id="greeting">Good day, sunshine! ☀️</h1>
+                <p class="subtitle">Ready to make today a little more productive?</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar" id="profileAvatar">🌻</div>
+                <div>
+                    <strong id="profileUsername">Focus Buddy</strong>
+                    <small id="levelText">Level 1</small>
+                </div>
+                <button class="logout-btn" id="logoutBtn" type="button">Log out</button>
+            </div>
+        </header>
+
+        <!-- STATS -->
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <span class="stat-icon">⏳</span>
+                <p>Focus time</p>
+                <h2 id="focusHours">0 min</h2>
+                <small>Today's progress</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">🍅</span>
+                <p>Sessions completed</p>
+                <h2 id="sessionCount">0</h2>
+                <small>Keep it going!</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">✨</span>
+                <p>Total experience</p>
+                <h2 id="xpCount">0 XP</h2>
+                <small id="nextLevel">You're just getting started</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">🔥</span>
+                <p>Daily streak</p>
+                <h2 id="streakCount">0 days</h2>
+                <small>Build your habit</small>
+            </article>
+
+        </section>
+
+        <!-- TIMER AND TASKS -->
+        <section class="content-grid">
+
+            <article class="panel timer-panel" id="focus">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">YOUR FOCUS SPACE</span>
+                        <h2>Time to bloom 🌱</h2>
+                    </div>
+                    <span class="status-pill" id="timerStatus">Ready</span>
+                </div>
+
+                <div class="timer-tabs">
+                    <button class="timer-tab active" data-mode="focus">Focus</button>
+                    <button class="timer-tab" data-mode="short">Short break</button>
+                    <button class="timer-tab" data-mode="long">Long break</button>
+                </div>
+
+                <div class="timer-circle" id="timerCircle">
+                    <div class="timer-inner">
+                        <span class="timer-emoji">🌿</span>
+                        <h1 id="timerDisplay">25:00</h1>
+                        <p id="timerLabel">Time to focus</p>
+                    </div>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="primary-btn" id="startBtn">▶ Start focus</button>
+                    <button class="secondary-btn" id="resetBtn">↻</button>
+                </div>
+
+                <div class="timer-settings">
+                    <label for="focusDuration">Focus duration</label>
+                    <select id="focusDuration">
+                        <option value="15">15 minutes</option>
+                        <option value="25" selected>25 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="50">50 minutes</option>
+                    </select>
+                </div>
+
+                <p class="timer-quote">"You don't have to be perfect. Just begin." 🌼</p>
+            </article>
+
+            <!-- TASK MANAGER -->
+            <article class="panel task-panel" id="tasks">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">YOUR LITTLE GOALS</span>
+                        <h2>Today's tasks 📝</h2>
+                    </div>
+                    <span class="task-total" id="taskTotal">0 tasks</span>
+                </div>
+
+                <form id="taskForm" class="task-form">
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="What would you like to do?"
+                        maxlength="100"
+                        required
+                    >
+                    <button type="submit">+</button>
+                </form>
+
+                <div class="task-list" id="taskList">
+                    <div class="empty-state">
+                        <span>🌷</span>
+                        <p>No tasks yet. Add a little goal!</p>
+                    </div>
+                </div>
+
+                <div class="task-footer">
+                    <span id="taskProgress">0 of 0 completed</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="taskProgressBar"></div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- BOTTOM DASHBOARD -->
+        <section class="bottom-grid">
+
+            <article class="panel progress-panel" id="progress">
+                <span class="eyebrow">YOUR JOURNEY</span>
+                <h2>Focus progress 📈</h2>
+                <p class="subtitle">Your focus minutes over the last 7 days.</p>
+                <div class="chart-container">
+                    <canvas id="focusChart"></canvas>
+                </div>
+            </article>
+
+            <article class="panel level-panel" id="achievements">
+                <span class="eyebrow">YOUR LITTLE WINS</span>
+                <h2>Growing together 🌻</h2>
+
+                <div class="level-info">
+                    <div class="level-avatar">🌱</div>
+                    <div>
+                        <strong id="levelName">Seedling · Level 1</strong>
+                        <p id="xpProgressText">0 / 100 XP</p>
+                    </div>
+                </div>
+
+                <div class="progress-track level-track">
+                    <div class="progress-fill" id="xpProgressBar"></div>
+                </div>
+
+                <h3 class="achievement-heading">Achievements</h3>
+
+                <div class="achievement-list" id="achievementList">
+                    <div class="achievement">🌟 First focus session</div>
+                    <div class="achievement">🍅 Focus master</div>
+                    <div class="achievement">🔥 Consistency star</div>
+                </div>
+            </article>
+
+        </section>
+
+        <section class="settings-section" id="settings">
+            <article class="panel settings-panel">
+                <span class="eyebrow">MAKE IT YOURS</span>
+                <h2>Profile settings ⚙️</h2>
+                <form id="profileForm" class="settings-form">
+                    <label for="profilePhoto">Profile photo</label>
+                    <input type="file" id="profilePhoto" accept="image/*">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername" maxlength="40" required>
+                    <button class="primary-btn" type="submit">Save profile</button>
+                    <p class="form-message" id="profileMessage" role="status"></p>
+                </form>
+
+                <h3>Change password</h3>
+                <form id="changePasswordForm" class="settings-form">
+                    <label for="oldPassword">Current password</label>
+                    <input type="password" id="oldPassword" autocomplete="current-password" required>
+                    <label for="newPassword">New password</label>
+                    <input type="password" id="newPassword" autocomplete="new-password" minlength="6" required>
+                    <button class="primary-btn" type="submit">Change password</button>
+                    <p class="form-message" id="passwordMessage" role="status"></p>
+                </form>
+            </article>
+        </section>
+
+        <footer class="footer">
+            Made with ♡ by FOKUS. — Your focus journey starts here.
+        </footer>
+
+    </main>
+</div>
+
+<div class="sound-controls">
+    <p>🎧 Choose your focus atmosphere</p>
+
+    <div class="sound-buttons">
+        <button class="sound-btn" data-sound="calm">
+            🌧️ Calm tone
+        </button>
+
+        <button class="sound-btn" data-sound="ambient">
+            🌿 Ambient tone
+        </button>
+
+        <button class="sound-btn" id="stopSound">
+            🔇 Stop sound
+        </button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
